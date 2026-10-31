@@ -1,0 +1,74 @@
+# Flutter and Dart generated files
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub/
+.pub-cache/
+build/
+coverage/
+/doc/api/
+app.*.symbols
+app.*.map.json
+*.apk
+*.aab
+*.ipa
+
+# Local environment files; sanitized templates remain trackable
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.sample
+!.env.template
+
+# Private keys and signing credentials
+*.jks
+*.keystore
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Android machine-local configuration and generated output
+/android/.gradle/
+/android/.kotlin/
+/android/.cxx/
+/android/captures/
+/android/local.properties
+/android/key.properties
+/android/app/debug/
+/android/app/profile/
+/android/app/release/
+
+# Local Node dependencies and Supabase CLI state
+node_modules/
+/ai-diagnose/.cache/
+/supabase/.temp/
+/supabase/.branches/
+
+# IDE, editor, operating-system, and temporary files
+.idea/
+*.iml
+*.ipr
+*.iws
+.history/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.class
+*.swp
+*.swo
+*~
+*.tmp
+*.log
+npm-debug.log*
+
+# Local agent UI state, not shared commands or agent configuration
+/.kilo/agent-manager.json
+
+# Local archives, proposal documents, and the AI helper's test photo
+*.zip
+/TM471-A-Proposal-*.docx
+/ai-diagnose/photo.jpg
+
+# Keep pubspec.lock, source, assets, UI references, and migrations in Git.

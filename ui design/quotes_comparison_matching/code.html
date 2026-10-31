@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#000000", "primary-fixed": "#dbe1ff", "on-secondary": "#ffffff", "surface-tint": "#565d79", "on-surface": "#0b1c30", "inverse-on-surface": "#eaf1ff", "primary-fixed-dim": "#bec5e5", "secondary-fixed-dim": "#ffb95f", "on-secondary-fixed-variant": "#653e00", "surface-container-lowest": "#ffffff", "outline-variant": "#c6c6ce", "surface": "#f8f9ff", "surface-container-high": "#dce9ff", "on-primary-fixed": "#131a33", "on-tertiary": "#ffffff", "surface-dim": "#cbdbf5", "surface-container": "#e5eeff", "tertiary": "#000000", "error": "#ba1a1a", "surface-variant": "#d3e4fe", "surface-container-low": "#eff4ff", "on-secondary-container": "#684000", "on-primary": "#ffffff", "on-surface-variant": "#45464d", "on-tertiary-fixed-variant": "#005236", "on-tertiary-container": "#009668", "on-secondary-fixed": "#2a1700", "outline": "#76767e", "background": "#f8f9ff", "tertiary-container": "#002113", "inverse-primary": "#bec5e5", "secondary-container": "#fea619", "surface-bright": "#f8f9ff", "on-tertiary-fixed": "#002113", "primary-container": "#131a33", "on-error": "#ffffff", "on-error-container": "#93000a", "inverse-surface": "#213145", "on-primary-fixed-variant": "#3e4660", "surface-container-highest": "#d3e4fe", "error-container": "#ffdad6", "on-primary-container": "#7b83a0", "tertiary-fixed": "#6ffbbe", "secondary": "#855300", "on-background": "#0b1c30", "tertiary-fixed-dim": "#4edea3", "secondary-fixed": "#ffddb8" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "gutter": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin": "1rem", "space-md": "1rem", "gutter-tablet": "1.5rem", "margin-tablet": "2rem", "margin-desktop": "3rem", "space-xs": "0.25rem", "gutter-desktop": "2rem", "space-xl": "2.5rem" }, fontFamily: { "label-lg": ["Manrope"], "label-sm": ["Manrope"], "title-lg": ["Manrope"], "headline-lg": ["Space Grotesk"], "label-md": ["Manrope"], "title-md": ["Manrope"], "body-lg": ["Manrope"], "headline-xl-mobile": ["Space Grotesk"], "body-md": ["Manrope"], "headline-lg-mobile": ["Space Grotesk"], "body-sm": ["Manrope"], "headline-xl": ["Space Grotesk"], "headline-md": ["Space Grotesk"] }, fontSize: { "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "14px", "fontWeight": "700" }], "title-lg": ["18px", { "lineHeight": "26px", "fontWeight": "700" }], "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }], "headline-xl-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "headline-xl": ["38px", { "lineHeight": "46px", "fontWeight": "700" }], "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f8f9ff;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0 flex-1"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center shadow-[0_2px_8px_rgba(11,28,48,0.12)] shrink-0"><span class="material-symbols-outlined text-secondary-container text-[22px]">build_circle</span></div><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-tight text-on-surface uppercase font-bold leading-none">Sanayee</span><span class="px-1.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-bold uppercase leading-none">PRO</span></div><button class="flex items-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors mt-0.5 text-left truncate"><span class="material-symbols-outlined text-secondary text-[14px] shrink-0">location_on</span><span class="font-label-sm text-label-sm truncate font-semibold">Nasr City, Cairo</span><span class="material-symbols-outlined text-[14px] text-outline shrink-0">expand_more</span></button></div></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Notifications" class="relative w-11 h-11 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[24px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin space-y-space-md">
+<!-- Active Request Context Header -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between gap-space-sm mb-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
+        Receiving Quotes (3 Received)
+      </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+        Expires in 18m
+      </span>
+</div>
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-error text-[18px]">warning</span>
+<span class="font-label-sm text-label-sm text-error uppercase font-bold tracking-tight">Urgent Plumbing</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface font-bold truncate">Water Pipe Burst Under Kitchen Sink</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+          Building 14, Abbas El Akkad, Nasr City
+        </p>
+</div>
+<div class="w-12 h-12 rounded-xl bg-error-container/40 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-error text-[26px]">faucet</span>
+</div>
+</div>
+<!-- AI Diagnostic Snapshot Metric -->
+<div class="mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-space-sm flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-container text-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+</div>
+<span class="font-label-md text-label-md font-semibold">Diagnostic Target: EGP 240 – 310</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-tertiary-container bg-tertiary-fixed/30 px-2 py-0.5 rounded-full font-bold">Standard PPR</span>
+</div>
+</section>
+<!-- Interactive Comparison Chips Bar -->
+<div class="flex items-center gap-space-xs overflow-x-auto py-1">
+<button class="px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shrink-0 shadow-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+      Smart Rank
+    </button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md shrink-0 flex items-center gap-1.5 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+      Lowest Price
+    </button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md shrink-0 flex items-center gap-1.5 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+      Fastest Arrival
+    </button>
+</div>
+<!-- Smart Match Highlight Card: Eng. Mahmoud El-Sayed (Primary Hero Candidate) -->
+<div class="relative bg-surface-container-lowest rounded-xl p-space-md shadow-md space-y-space-md overflow-hidden">
+<!-- Radiant Solar Accent Banner -->
+<div class="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-secondary-container/15 blur-2xl pointer-events-none"></div>
+<!-- Match Badge Header -->
+<div class="flex items-center justify-between relative z-10">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container text-secondary-container shadow-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-md text-label-md uppercase font-bold tracking-tight">Best Match (94% Fit)</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-high px-2 py-0.5 rounded-md">
+<span class="material-symbols-outlined text-secondary text-[14px]">near_me</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">1.4 km away</span>
+</div>
+</div>
+<!-- Craftsman Identity & Credibility -->
+<div class="flex items-start gap-space-md relative z-10">
+<div class="relative shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover shadow-sm" data-alt="Close up portrait of an experienced Egyptian craftsman and master plumber named Mahmoud El Sayed wearing work overalls with a warm, confident smile in a modern Cairo workshop setting, natural morning lighting, editorial luxury portrait style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXVzLjzQwXo1axsXY_sYwNt9Cf8uvAjTh8MJUyxRjO88grr1EabnRaGoa9zyFZwVNAEH8Ax0U_5fv83_vIs3I0jPx_sVeUH0sRjSV0aMqMCZCPZLdoYOMSIc2S5wl2q2nwByUjdH2DjIkAI0enlP8b1s7s9nooxfg_KgdAXml-G91_nX1t9Nl17D8G5XhkYKkY8A4H397uGlG6Oz2vU58FNGLxZ7oiKIpRcdYwMN67"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-tertiary-fixed-dim rounded-full flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-tertiary-container text-[11px] font-bold">check</span>
+</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5 truncate">
+<h2 class="font-title-lg text-title-lg text-on-surface truncate">Eng. Mahmoud El-Sayed</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium">Master Plumber • 12 yrs exp</p>
+<div class="flex items-center gap-space-sm mt-1">
+<span class="inline-flex items-center gap-0.5 font-label-md text-label-md text-secondary font-bold">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            4.95
+          </span>
+<span class="font-body-sm text-body-sm text-outline">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">240+ completed jobs</span>
+</div>
+</div>
+</div>
+<!-- Match Breakdown Badges -->
+<div class="grid grid-cols-3 gap-space-xs pt-1">
+<div class="bg-surface-container-low rounded-lg p-2 text-center">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Distance</div>
+<div class="font-title-md text-title-md text-on-surface font-bold">98%</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2 text-center">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Rating</div>
+<div class="font-title-md text-title-md text-on-surface font-bold">95%</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2 flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-container text-[18px]">verified_user</span>
+<div class="font-label-sm text-label-sm text-on-tertiary-container font-bold">Verified ID</div>
+</div>
+</div>
+<!-- Price, Arrival & Direct Quote Note -->
+<div class="bg-surface-container-high/40 rounded-xl p-space-md space-y-space-sm">
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Quoted Price</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">EGP 280</span>
+<span class="font-label-sm text-label-sm text-outline">all-inclusive</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Est. Arrival</span>
+<div class="flex items-center justify-end gap-1 text-secondary font-bold">
+<span class="material-symbols-outlined text-[18px] animate-pulse">local_shipping</span>
+<span class="font-title-lg text-title-lg">25 mins</span>
+</div>
+</div>
+</div>
+<!-- Personalized Message Note -->
+<div class="bg-surface-container-lowest rounded-lg p-space-sm shadow-xs flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">chat</span>
+<p class="font-body-sm text-body-sm text-on-surface leading-snug">
+          “I have standard PPR pipes and pressure tools in my van. Can be there right away.”
+        </p>
+</div>
+</div>
+<!-- Escrow Protection Micro-banner -->
+<div class="flex items-center gap-2 px-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-on-tertiary-container text-[16px]">lock</span>
+<p class="font-body-sm text-body-sm">
+        Funds stay secured in escrow until you inspect and approve the job.
+      </p>
+</div>
+<!-- Hero Conversion CTA Block -->
+<div class="space-y-space-xs pt-1">
+<button class="w-full h-13 py-3.5 px-space-md bg-primary text-on-primary rounded-xl font-title-md text-title-md flex items-center justify-center gap-2 shadow-md hover:bg-primary-container transition-all active:scale-[0.99]">
+<span class="material-symbols-outlined text-secondary-container text-[20px]">handshake</span>
+        Accept Quote &amp; Lock Job (Escrow Protected)
+      </button>
+<button class="w-full py-2 text-center text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-1">
+<span>View Full Breakdown &amp; Reviews</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Other Quotes Comparison Header -->
+<div class="flex items-center justify-between pt-2">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Alternative Offers (2)</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Real-time bids</span>
+</div>
+<!-- Competing Offer Card 1: Fast & Premium -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-sm hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative shrink-0">
+<img class="w-12 h-12 rounded-xl object-cover" data-alt="Portrait of a licensed young Egyptian technician Tarek Nabil wearing a clean blue polo uniform, smiling outdoors in an upscale residential Heliopolis Cairo neighborhood, crisp afternoon lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDApw36TKW7VNVUMU5bQF3R0MnYIQ3SI9WtvL8ehhvK5BiZOS9J0gcg4x6KyttfSEOBQAjr1Foatbf8dXItSuEJbmGQny-XanOeaJCuaxiFxLkfHu797A4U-k92gqqS6VzmG7xBBxdx8pBpaCE-6vLrcEA3AubHuyaaIbfuw7A4s0S70eLwbEkkb0ICFx4fMsdL0BNVyyHRnIOe-j5e64QLuc6hVk9BW4N7AHo_fYCl"/>
+</div>
+<div class="min-w-0">
+<h4 class="font-title-md text-title-md text-on-surface truncate">Tarek Nabil</h4>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="inline-flex items-center text-secondary font-bold font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              4.82
+            </span>
+<span class="font-body-sm text-body-sm text-outline">•</span>
+<span class="font-label-sm text-label-sm truncate">Sanitary Tech (8 yrs)</span>
+</div>
+</div>
+</div>
+<div class="text-right shrink-0">
+<div class="font-title-lg text-title-lg text-on-surface font-bold">EGP 320</div>
+<div class="font-label-sm text-label-sm text-secondary font-semibold flex items-center justify-end gap-0.5">
+<span class="material-symbols-outlined text-[13px]">bolt</span>
+          15 mins
+        </div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2.5 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span>0.9 km • Makram Ebeid</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold">Fastest Dispatch</span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-2.5 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors flex items-center justify-center gap-1">
+        Select EGP 320
+      </button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+</button>
+</div>
+</div>
+<!-- Competing Offer Card 2: Budget Friendly -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-sm hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative shrink-0">
+<img class="w-12 h-12 rounded-xl object-cover" data-alt="Portrait of an older trusted Egyptian plumber named Hassan Abdel-Rahman with grey hair, warm eyes, holding a plumbing wrench, daylight Cairo workshop background with authentic copper fixtures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZdnaYnqOtJXlK_b4_noiqpr5ZWnBKKT48RI17qnPhU2ANuYlk5L02Ik109reGroHZ66IrTonm1TYjyuScaMUWCIdGYobuaDPAgVZQKVQRLihJGsX_ZLnLM67mY2HCy2O2P3Edzmneq0EaMSkK9EJ5JBOUMdbvQoqNhTzntxUFabDDlo7KzR8eDbH47h0MXsJy9iZEos6ri0weGsjsLJ2oFxMfbaai7mknfHge-U28"/>
+</div>
+<div class="min-w-0">
+<h4 class="font-title-md text-title-md text-on-surface truncate">Hassan Abdel-Rahman</h4>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="inline-flex items-center text-secondary font-bold font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              4.70
+            </span>
+<span class="font-body-sm text-body-sm text-outline">•</span>
+<span class="font-label-sm text-label-sm truncate">Senior Plumber (15 yrs)</span>
+</div>
+</div>
+</div>
+<div class="text-right shrink-0">
+<div class="font-title-lg text-title-lg text-on-surface font-bold">EGP 250</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant font-semibold flex items-center justify-end gap-0.5">
+<span class="material-symbols-outlined text-[13px]">schedule</span>
+          45 mins
+        </div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2.5 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span>3.2 km • Rabaa Square</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed/30 text-on-tertiary-container font-label-sm text-label-sm font-bold">Lowest Price</span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-2.5 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors flex items-center justify-center gap-1">
+        Select EGP 250
+      </button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+</button>
+</div>
+</div>
+<!-- Interactive Trust Assurance Banner -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">shield_with_heart</span>
+</div>
+<div class="space-y-0.5">
+<p class="font-title-md text-title-md text-on-surface font-semibold">Sanayee Guarantee Covered</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">30-day rework insurance &amp; direct dispute mediation on all locked quotes.</p>
+</div>
+</div>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(11,28,48,0.06)]" data-active-classes="text-on-surface font-bold"><div class="h-20 px-space-xs grid grid-cols-4 items-center"><a class="flex flex-col items-center justify-center gap-1 h-full text-on-surface-variant transition-colors min-h-[44px]" data-path="explore-home" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-label-sm text-label-sm">Explore</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-1 h-full transition-colors min-h-[44px] relative text-on-surface font-bold" data-path="my-requests" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[24px]">assignment_late</span><span class="absolute -top-1 -right-2 min-w-[16px] h-4 px-1 rounded-full bg-secondary text-on-secondary font-label-sm text-[10px] leading-tight flex items-center justify-center font-bold">2</span></div><span class="font-label-sm text-label-sm">Requests</span></a><a class="flex flex-col items-center justify-center gap-1 h-full text-on-surface-variant transition-colors min-h-[44px]" data-path="ai-diagnostics" href="#"><div class="px-2.5 py-1 rounded-full bg-primary-container text-secondary-container shadow-[0_2px_8px_rgba(254,166,25,0.2)] flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">auto_awesome</span><span class="font-label-sm text-label-sm font-bold tracking-tight text-on-primary">Ask AI</span></div><span class="font-label-sm text-label-sm font-semibold">Diagnostic</span></a><a class="flex flex-col items-center justify-center gap-1 h-full text-on-surface-variant transition-colors min-h-[44px]" data-path="profile-activity" href="#"><span class="material-symbols-outlined text-[24px]">manage_accounts</span><span class="font-label-sm text-label-sm">Activity</span></a></div></nav></body></html>

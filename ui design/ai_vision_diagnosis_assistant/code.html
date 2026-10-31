@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#000000", "primary-fixed": "#dbe1ff", "on-secondary": "#ffffff", "surface-tint": "#565d79", "on-surface": "#0b1c30", "inverse-on-surface": "#eaf1ff", "primary-fixed-dim": "#bec5e5", "secondary-fixed-dim": "#ffb95f", "on-secondary-fixed-variant": "#653e00", "surface-container-lowest": "#ffffff", "outline-variant": "#c6c6ce", "surface": "#f8f9ff", "surface-container-high": "#dce9ff", "on-primary-fixed": "#131a33", "on-tertiary": "#ffffff", "surface-dim": "#cbdbf5", "surface-container": "#e5eeff", "tertiary": "#000000", "error": "#ba1a1a", "surface-variant": "#d3e4fe", "surface-container-low": "#eff4ff", "on-secondary-container": "#684000", "on-primary": "#ffffff", "on-surface-variant": "#45464d", "on-tertiary-fixed-variant": "#005236", "on-tertiary-container": "#009668", "on-secondary-fixed": "#2a1700", "outline": "#76767e", "background": "#f8f9ff", "tertiary-container": "#002113", "inverse-primary": "#bec5e5", "secondary-container": "#fea619", "surface-bright": "#f8f9ff", "on-tertiary-fixed": "#002113", "primary-container": "#131a33", "on-error": "#ffffff", "on-error-container": "#93000a", "inverse-surface": "#213145", "on-primary-fixed-variant": "#3e4660", "surface-container-highest": "#d3e4fe", "error-container": "#ffdad6", "on-primary-container": "#7b83a0", "tertiary-fixed": "#6ffbbe", "secondary": "#855300", "on-background": "#0b1c30", "tertiary-fixed-dim": "#4edea3", "secondary-fixed": "#ffddb8" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "gutter": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin": "1rem", "space-md": "1rem", "gutter-tablet": "1.5rem", "margin-tablet": "2rem", "margin-desktop": "3rem", "space-xs": "0.25rem", "gutter-desktop": "2rem", "space-xl": "2.5rem" }, fontFamily: { "label-lg": ["Manrope"], "label-sm": ["Manrope"], "title-lg": ["Manrope"], "headline-lg": ["Space Grotesk"], "label-md": ["Manrope"], "title-md": ["Manrope"], "body-lg": ["Manrope"], "headline-xl-mobile": ["Space Grotesk"], "body-md": ["Manrope"], "headline-lg-mobile": ["Space Grotesk"], "body-sm": ["Manrope"], "headline-xl": ["Space Grotesk"], "headline-md": ["Space Grotesk"] }, fontSize: { "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "14px", "fontWeight": "700" }], "title-lg": ["18px", { "lineHeight": "26px", "fontWeight": "700" }], "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }], "headline-xl-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "headline-xl": ["38px", { "lineHeight": "46px", "fontWeight": "700" }], "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f8f9ff;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0 flex-1"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center shadow-[0_2px_8px_rgba(11,28,48,0.12)] shrink-0"><span class="material-symbols-outlined text-secondary-container text-[22px]">build_circle</span></div><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-tight text-on-surface uppercase font-bold leading-none">Sanayee</span><span class="px-1.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-bold uppercase leading-none">PRO</span></div><button class="flex items-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors mt-0.5 text-left truncate"><span class="material-symbols-outlined text-secondary text-[14px] shrink-0">location_on</span><span class="font-label-sm text-label-sm truncate font-semibold">Nasr City, Cairo</span><span class="material-symbols-outlined text-[14px] text-outline shrink-0">expand_more</span></button></div></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Notifications" class="relative w-11 h-11 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[24px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full pb-8">
+<!-- Interactive Scan Header -->
+<div class="px-margin pt-space-md pb-space-sm flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+        Computer Vision v3.2
+      </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm font-semibold">Triage Live</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight font-bold">
+      Technical Assessment
+    </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+      Snap or upload fault photo for instant triage, safety guidance, and accurate cost estimates.
+    </p>
+</div>
+<!-- Camera / Vision Viewfinder Card -->
+<div class="px-margin my-space-sm">
+<div class="relative w-full rounded-2xl overflow-hidden shadow-lg bg-primary-container">
+<!-- Uploaded Fault Photo with Bounding Box Overlay -->
+<div class="w-full h-72 bg-cover bg-center relative" data-alt="Interior close-up of a wall-mounted white Carrier split air conditioner unit mounted in a sunlit Cairo apartment. Water droplets leak from the lower plastic seam onto a tiled floor. Visible frost crystals and frosted evaporator coil visible behind the vent grill. Sharp forensic lighting, micro-focused on cooling fins and dripping condensate tray." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCaP0g_GxnbUHCv2DMRR0e1av1TQSiU1ZVS2ZmFqbYgWB-kGlNdwFRMNiLJJ3CQcJtwHAop0W-ilCpUkWlH4nxx0BE-3u8ad8KX3fKOS0Rm1AQTl5uYAOUK-6Tk181X3pu0Fj3UxOFj2RWHx1CZxqikdSKt73A2fPCNv7ZUweS_HCbYHXR4HUhlrrT2Jxb0KJjdLaleIXxq9rBJ59ugR5xuXW1qOUvL2WH4HT8cEP1q')">
+<!-- Scanner HUD Grid Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-primary/40 flex flex-col justify-between p-4 pointer-events-none">
+<!-- Top Telemetry Row -->
+<div class="flex items-center justify-between text-on-primary">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/70 backdrop-blur-md">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wide">Optical Match: Carrier 1.5HP</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-lowest/20 backdrop-blur-md text-surface-container-lowest">
+<span class="material-symbols-outlined text-[14px]">grid_view</span>
+<span class="font-label-sm text-label-sm font-bold">FOV 84°</span>
+</div>
+</div>
+<!-- Central AI Bounding Box targeting ice and drain tray -->
+<div class="absolute top-[38%] left-[18%] w-[64%] h-[46%] rounded-lg pointer-events-auto">
+<!-- Pulsing Corner Brackets -->
+<div class="absolute inset-0 rounded-lg shadow-[0_0_0_2px_rgba(254,166,25,0.9)] bg-secondary-container/10"></div>
+<div class="absolute -top-1 -left-1 w-3 h-3 bg-secondary-container rounded-sm"></div>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-secondary-container rounded-sm"></div>
+<div class="absolute -bottom-1 -left-1 w-3 h-3 bg-secondary-container rounded-sm"></div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-secondary-container rounded-sm"></div>
+<!-- Floating Defect Identifier Tag -->
+<div class="absolute -top-7 left-0 flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary-container text-on-secondary-container shadow-md">
+<span class="material-symbols-outlined text-[13px]">ac_unit</span>
+<span class="font-label-sm text-label-sm font-bold tracking-tight">Coil Frost &amp; Overflow (Tray Blocked)</span>
+</div>
+<div class="absolute bottom-1 right-2 px-1.5 py-0.5 rounded bg-primary/80 backdrop-blur-sm text-secondary-container font-label-sm text-label-sm">
+              Conf: 96.4%
+            </div>
+</div>
+<!-- Bottom Action HUD -->
+<div class="flex items-center justify-between pointer-events-auto">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container-lowest/80 text-on-surface backdrop-blur-md hover:bg-surface-container-lowest shadow-sm transition-all text-left">
+<span class="material-symbols-outlined text-[16px] text-secondary">cached</span>
+<span class="font-label-sm text-label-sm font-bold">Retake Photo</span>
+</button>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-primary/70 backdrop-blur-md text-on-primary">
+<span class="material-symbols-outlined text-[15px] text-tertiary-fixed">verified</span>
+<span class="font-label-sm text-label-sm font-semibold">Analyzed in 1.4s</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Safety Warning Banner (Amber / Red) -->
+<div class="px-margin mt-space-sm mb-space-xs">
+<div class="p-3.5 rounded-2xl bg-error-container text-on-error-container shadow-sm flex items-start gap-3">
+<div class="w-8 h-8 rounded-xl bg-error text-on-error flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md font-bold text-on-error-container leading-tight">Critical Safety Hazard</span>
+<p class="font-body-sm text-body-sm text-on-error-container/90 mt-1 leading-snug">
+          Caution: Turn off the main AC circuit breaker immediately if water is dripping near electrical sockets or baseboard wiring.
+        </p>
+</div>
+</div>
+</div>
+<!-- Main AI Diagnostic Synthesis Card -->
+<div class="px-margin my-space-sm">
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-md flex flex-col gap-space-md">
+<!-- Defect Header & Category Match Badge -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-bold">Detected Condition</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-primary-fixed font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+            High Priority
+          </span>
+</div>
+<h2 class="font-title-lg text-title-lg text-on-surface font-bold leading-tight">
+          Evaporator Coil Freeze &amp; Blocked Drain Pipe
+        </h2>
+<div class="flex items-center gap-2 mt-1">
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-surface-container-high text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">hvac</span>
+<span class="font-label-sm text-label-sm font-semibold">HVAC / Air Conditioning Maintenance</span>
+</div>
+<div class="flex items-center gap-0.5 px-2 py-1 rounded-xl bg-secondary-container/20 text-on-secondary-container font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">auto_graph</span>
+            96% Confidence
+          </div>
+</div>
+</div>
+<!-- Scope & Estimated Cost Bento Grid -->
+<div class="grid grid-cols-2 gap-space-sm pt-2">
+<!-- Duration Box -->
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">timelapse</span>
+<span class="font-label-sm text-label-sm font-bold uppercase">Estimated Scope</span>
+</div>
+<div class="mt-2">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">45–60</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">mins</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">On-site craftsman triage</span>
+</div>
+<!-- Price Range Box -->
+<div class="p-3 rounded-xl bg-surface-container flex flex-col justify-between">
+<div class="flex items-center gap-1.5 text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+<span class="font-label-sm text-label-sm font-bold uppercase">Indicative Cost</span>
+</div>
+<div class="mt-2">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">EGP 350–500</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate">Inspection + Chemical Coil Wash</span>
+</div>
+</div>
+<!-- Triage Root Cause Breakdown -->
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold tracking-wide">Diagnosis Findings</span>
+<div class="flex items-start gap-2 text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface leading-snug">Restricted airflow caused refrigerant line pressure drop, creating frost buildup along the cooling fins.</span>
+</div>
+<div class="flex items-start gap-2 text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface leading-snug">Condensed water cannot exit via gravity tube due to sludge accumulation, overflowing the front casing.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Triage Questions (Refine Diagnostic Confidence) -->
+<div class="px-margin my-space-sm flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">quiz</span>
+<span class="font-title-md text-title-md font-bold text-on-surface">Precision Triage</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Tap to refine quote</span>
+</div>
+<!-- Question 1: Outdoor Fan -->
+<div class="p-3 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Is the outdoor compressor fan spinning?</span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">info</span>
+</div>
+<div class="flex items-center gap-2" id="triage-fan-options">
+<button class="triage-btn px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md font-bold transition-all hover:bg-surface-container-high" onclick="toggleTriage(this, 'fan')">
+          Yes, normal spin
+        </button>
+<button class="triage-btn px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md font-bold transition-all hover:bg-surface-container-high" onclick="toggleTriage(this, 'fan')">
+          No / Buzzing noise
+        </button>
+<button class="triage-btn px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md font-bold transition-all hover:bg-surface-container-high" onclick="toggleTriage(this, 'fan')">
+          Unsure / High rise
+        </button>
+</div>
+</div>
+<!-- Question 2: Burning Smell -->
+<div class="p-3 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Any burning or electrical smell?</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold">Safety check</span>
+</div>
+<div class="flex items-center gap-2" id="triage-smell-options">
+<button class="triage-btn px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md font-bold transition-all hover:bg-surface-container-high" onclick="toggleTriage(this, 'smell')">
+          None detected
+        </button>
+<button class="triage-btn px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md font-bold transition-all hover:bg-surface-container-high" onclick="toggleTriage(this, 'smell')">
+          Faint plastic odor
+        </button>
+<button class="triage-btn px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md font-bold transition-all hover:bg-surface-container-high" onclick="toggleTriage(this, 'smell')">
+          Strong smoke smell
+        </button>
+</div>
+</div>
+</div>
+<!-- Verified Specialist Preview matched to this defect -->
+<div class="px-margin my-space-sm">
+<div class="p-3 rounded-2xl bg-surface-container-high/60 flex items-center justify-between gap-3">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="relative w-11 h-11 rounded-xl overflow-hidden shrink-0 shadow-sm bg-primary-container">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of an Egyptian master HVAC technician named Eng. Tarek in navy work vest with Sanayee Pro certified brass badge, smiling with modern Cairo background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNy0J6CDLwIOOKeXZm5ES9zhwuQrqfrbfxOkiq3x3vAOCKtVHk6Z8EAEAIUpBRhse4n3trpULneb4Il8IvfsSUrnVYEYZOqKvqFogCDrd9ova3_x60bRWc9bS4spz5kEa7exnrGGkSZ0bpyfp0fYPMJzRrHUGces0s0nuLeHWuak2qQ7tV6E-y1HkpvHV_jEa3emRkwHA5gU7Z5C7nzlV6Q-vtW_LbkJWMkfrkDadG"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim ring-1 ring-surface-container-lowest"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1 truncate">
+<span class="font-title-md text-title-md font-bold text-on-surface truncate">Eng. Tarek Helmy</span>
+<span class="material-symbols-outlined text-[15px] text-tertiary-container">verified</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">HVAC Specialist • 650m away in Nasr City</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-label-sm text-label-sm text-secondary font-bold">15-min ETA</span>
+<div class="flex items-center gap-0.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">4.9</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">(142)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Primary Sticky Bottom Booking Trigger -->
+<div class="px-margin mt-space-md flex flex-col gap-2">
+<button class="w-full h-14 rounded-2xl bg-primary text-on-primary font-title-md text-title-md font-bold flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all hover:bg-primary/90" id="submit-diagnosis-btn" onclick="handleFillRequest()">
+<span class="material-symbols-outlined text-[22px] text-secondary-container">assignment_turned_in</span>
+<span>Auto-fill Service Request with this Diagnosis</span>
+</button>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container">lock</span>
+      Price protected by Sanayee Craftsman Guarantee
+    </p>
+</div>
+</div>
+<script>
+  function toggleTriage(button, group) {
+    const parent = button.parentElement;
+    const buttons = parent.querySelectorAll('.triage-btn');
+    buttons.forEach(btn => {
+      btn.classList.remove('bg-primary-container', 'text-on-primary', 'shadow-sm');
+      btn.classList.add('bg-surface-container', 'text-on-surface');
+    });
+    button.classList.remove('bg-surface-container', 'text-on-surface');
+    button.classList.add('bg-primary-container', 'text-on-primary', 'shadow-sm');
+  }
+
+  function handleFillRequest() {
+    const btn = document.getElementById('submit-diagnosis-btn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span><span>Preparing Dispatch Dossier...</span>`;
+    btn.classList.add('opacity-90');
+    setTimeout(() => {
+      btn.innerHTML = `<span class="material-symbols-outlined text-tertiary-fixed text-[20px]">check_circle</span><span>Diagnosis Transferred! Redirecting...</span>`;
+      btn.classList.remove('bg-primary');
+      btn.classList.add('bg-primary-container');
+    }, 1100);
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(11,28,48,0.06)]" data-active-classes="text-on-surface font-bold"><div class="h-20 px-space-xs grid grid-cols-4 items-center"><a class="flex flex-col items-center justify-center gap-1 h-full text-on-surface-variant transition-colors min-h-[44px]" data-path="explore-home" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-label-sm text-label-sm">Explore</span></a><a class="flex flex-col items-center justify-center gap-1 h-full text-on-surface-variant transition-colors min-h-[44px] relative" data-path="my-requests" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[24px]">assignment_late</span><span class="absolute -top-1 -right-2 min-w-[16px] h-4 px-1 rounded-full bg-secondary text-on-secondary font-label-sm text-[10px] leading-tight flex items-center justify-center font-bold">2</span></div><span class="font-label-sm text-label-sm">Requests</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-1 h-full transition-colors min-h-[44px] text-on-surface font-bold" data-path="ai-diagnostics" href="#"><div class="px-2.5 py-1 rounded-full bg-primary-container text-secondary-container shadow-[0_2px_8px_rgba(254,166,25,0.2)] flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">auto_awesome</span><span class="font-label-sm text-label-sm font-bold tracking-tight text-on-primary">Ask AI</span></div><span class="font-label-sm text-label-sm font-semibold">Diagnostic</span></a><a class="flex flex-col items-center justify-center gap-1 h-full text-on-surface-variant transition-colors min-h-[44px]" data-path="profile-activity" href="#"><span class="material-symbols-outlined text-[24px]">manage_accounts</span><span class="font-label-sm text-label-sm">Activity</span></a></div></nav></body></html>
