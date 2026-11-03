@@ -7,6 +7,8 @@ import '../../data/repositories/demo_auth_repository.dart';
 import '../../data/repositories/catalog_repository.dart';
 import '../../data/repositories/notifications_repository.dart';
 import '../../data/repositories/provider_repository.dart';
+import '../../data/repositories/service_request_repository.dart';
+import '../../services/request_photo_picker.dart';
 import '../../services/verification_document_picker.dart';
 import '../../ui/auth/bloc/session_bloc.dart';
 
@@ -16,6 +18,8 @@ class StateWrapper extends StatelessWidget {
   final AuthRepository? authRepository;
   final ProviderRepository? providerRepository;
   final VerificationDocumentPicker? verificationDocumentPicker;
+  final ServiceRequestRepository? serviceRequestRepository;
+  final RequestPhotoPicker? requestPhotoPicker;
 
   const StateWrapper({
     super.key,
@@ -23,6 +27,8 @@ class StateWrapper extends StatelessWidget {
     this.authRepository,
     this.providerRepository,
     this.verificationDocumentPicker,
+    this.serviceRequestRepository,
+    this.requestPhotoPicker,
   });
 
   @override
@@ -64,6 +70,19 @@ class StateWrapper extends StatelessWidget {
         RepositoryProvider<VerificationDocumentPicker>(
           create: (_) =>
               verificationDocumentPicker ?? VerificationDocumentPicker.instance,
+        ),
+        RepositoryProvider<ServiceRequestRepository>(
+          create: (context) =>
+              serviceRequestRepository ??
+              ServiceRequestRepository(
+                authRepository: context.read<AuthRepository>(),
+                client: context.read<AuthRepository>().isDemo
+                    ? null
+                    : AppConfig.supabase!,
+              ),
+        ),
+        RepositoryProvider<RequestPhotoPicker>(
+          create: (_) => requestPhotoPicker ?? RequestPhotoPicker.instance,
         ),
       ],
       child: BlocProvider<SessionBloc>(

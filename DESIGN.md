@@ -1,7 +1,9 @@
-# Design system - Salahly
+# Design system - Salhly
 
-These are the scaffold's shared conventions, not a finalized Salahly visual design.
-Keep feature UI minimal until a product design is approved.
+The app follows the supplied `ui design/` references using the existing shared
+Material 3 components. Keep the Salhly name even where a reference says Sanyee.
+Adapt references to working features; do not copy fictional prices, verification
+claims, AI actions, or unavailable booking flows.
 
 ---
 
@@ -12,7 +14,9 @@ Keep feature UI minimal until a product design is approved.
 - **Dark mode:** Light and dark themes are supported; app can follow system brightness. Use semantic colors — do not branch on brightness in widgets for basic surfaces.
 - **Customization:** Global `ThemeData` lives in `lib/src/theme/theme.dart` — avoid one-off `ThemeData` overrides in feature widgets.
 
-- **Seed color:** `#FFFFFF` (used to derive `ColorScheme` via `ColorScheme.fromSeed` where applicable).
+- **Palette:** obsidian `#0B132B`, cool canvas `#F7F9FB`, white/pale-blue cards,
+  amber `#FEA619` accents, and semantic emerald success states. The dark theme
+  supplies equivalent readable roles; reuse `AppPalettes` and `ColorScheme`.
 
 ---
 
@@ -132,6 +136,15 @@ repository, or cubit. Only the active section is mounted; inputs are retained
 in the draft, and save/submit actions are explicit. Typing does not rebuild the
 service chips or perform backend writes. Private document previews load on
 demand, use a bounded decode target, and evict their image-cache entry on close.
+
+Service requests follow the same feature-local page/cubit/step pattern. Use one
+mounted form section and a finite entrance only when changing sections, plus a
+short progress/status transition. Keep long headings inside the scrollable area
+so enlarged text and keyboards cannot crowd out the form; controls use intrinsic
+height and accessible hit targets. Category/photo widgets must not rebuild for
+unrelated keystrokes. History is lazy and retains content while refreshing.
+Private request photos use `RequestPhotoImage`, bounded memory-only decoding,
+and immediate authorization-based hiding, never the public network image cache.
 
 ### Dark mode checklist
 

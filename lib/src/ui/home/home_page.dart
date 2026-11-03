@@ -133,7 +133,10 @@ class _HomeViewState extends State<_HomeView> {
                         ? () => context.pushNamed(
                             AppRouteNames.providerOnboarding,
                           )
-                        : _browseServices,
+                        : () => context.pushNamed(
+                            AppRouteNames.createServiceRequest,
+                          ),
+                    onBrowse: isProvider ? null : _browseServices,
                   ),
                   SizedBox(height: AppSpacing.xl),
                   Row(
@@ -322,10 +325,15 @@ class _HomeViewState extends State<_HomeView> {
 }
 
 class _DiscoveryCard extends StatelessWidget {
-  const _DiscoveryCard({required this.isProvider, required this.onPressed});
+  const _DiscoveryCard({
+    required this.isProvider,
+    required this.onPressed,
+    this.onBrowse,
+  });
 
   final bool isProvider;
   final VoidCallback onPressed;
+  final VoidCallback? onBrowse;
 
   @override
   Widget build(BuildContext context) {
@@ -380,6 +388,16 @@ class _DiscoveryCard extends StatelessWidget {
                           ),
                         ),
                       ),
+                      if (!isProvider)
+                        IconButton(
+                          tooltip: 'requests.history_title'.tr(),
+                          onPressed: () =>
+                              context.pushNamed(AppRouteNames.serviceRequests),
+                          icon: const Icon(
+                            Icons.receipt_long_outlined,
+                            color: Colors.white,
+                          ),
+                        ),
                     ],
                   ),
                   SizedBox(height: AppSpacing.md),
@@ -403,19 +421,36 @@ class _DiscoveryCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: AppSpacing.lg),
-                  AppButton(
-                    label:
-                        (isProvider ? 'provider.open' : 'home.browse_services')
-                            .tr(),
-                    color: AppPalettes.amber,
-                    textColor: AppPalettes.ink,
-                    height: ButtonSize.large,
-                    suffixIcon: const Icon(
-                      Icons.arrow_forward_rounded,
-                      color: AppPalettes.ink,
-                      size: 20,
-                    ),
-                    onPressed: onPressed,
+                  Wrap(
+                    spacing: AppSpacing.sm,
+                    runSpacing: AppSpacing.sm,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      AppButton(
+                        label:
+                            (isProvider
+                                    ? 'provider.open'
+                                    : 'requests.new_request')
+                                .tr(),
+                        color: AppPalettes.amber,
+                        textColor: AppPalettes.ink,
+                        height: ButtonSize.large,
+                        suffixIcon: const Icon(
+                          Icons.arrow_forward_rounded,
+                          color: AppPalettes.ink,
+                          size: 20,
+                        ),
+                        onPressed: onPressed,
+                      ),
+                      if (onBrowse != null)
+                        TextButton(
+                          onPressed: onBrowse,
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.white,
+                          ),
+                          child: Text('home.browse_services'.tr()),
+                        ),
+                    ],
                   ),
                 ],
               ),
@@ -489,7 +524,7 @@ class _CategoryCard extends StatelessWidget {
 
   void _showDetails(BuildContext context) {
     context.showAppBottomSheet<void>(
-      builder: (context) => SafeArea(
+      builder: (sheetContext) => SafeArea(
         top: false,
         child: SingleChildScrollView(
           child: Padding(
@@ -519,8 +554,24 @@ class _CategoryCard extends StatelessWidget {
                 SizedBox(height: AppSpacing.lg),
                 AppButton(
                   label: 'common.close'.tr(),
-                  onPressed: () => Navigator.of(context).pop(),
+                  variant: ButtonVariant.ghost,
+                  onPressed: () => Navigator.of(sheetContext).pop(),
                 ),
+                if (context.read<SessionBloc>().state.user?.role ==
+                    UserRole.customer) ...[
+                  SizedBox(height: AppSpacing.sm),
+                  AppButton(
+                    label: 'requests.request_service'.tr(),
+                    isFullWidth: true,
+                    onPressed: () {
+                      Navigator.of(sheetContext).pop();
+                      context.pushNamed(
+                        AppRouteNames.createServiceRequest,
+                        queryParameters: {'categoryId': category.id},
+                      );
+                    },
+                  ),
+                ],
               ],
             ),
           ),

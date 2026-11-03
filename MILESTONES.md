@@ -216,6 +216,53 @@ See `SETUP.md` for migration order, review commands, and live checks. No native
 configuration, new packages, production credentials, or later marketplace
 features are part of this continuation.
 
+### M6: Service Requests
+
+Status: implemented and locally verified (2026-10-31). Hosted Storage/API,
+multi-connection concurrency, and real-device acceptance remain external checks.
+
+Goals: customers can create and review their own requests with manual location,
+optional preferred time, and private photos. Keep the existing three-tab shell,
+Salhly visual language, and M1-M5 behavior; quotes, jobs, matching, and AI remain
+separate milestones.
+
+- [x] Customer-only form, history, and detail routes, reached from Home, service
+  category sheets, and Profile; provider/recovery/signed-out guards stay central.
+- [x] Immutable request/photo models and an explicitly demo/live repository,
+  with page-scoped cubits and no backend writes on keystrokes or gallery picks.
+- [x] Three local form sections with validation, retained input, consent, and
+  dirty-exit confirmation; no automatic GPS, maps, or device-location permission.
+- [x] Optional preferred instant stored in UTC and displayed in device local time;
+  a future preference within 180 days is not a confirmed appointment.
+- [x] Up to three JPEG/PNG photos, each at most 5 MiB, private authenticated
+  previews, bounded decoding, and immediate revocation/cache eviction on logout.
+- [x] Stable request/photo identities and transactional submission, including
+  photo-free idempotency, exact-manifest reconciliation, conservative cleanup,
+  and frozen drafts after ambiguous results or subsequent network failures.
+- [x] Owned, lazy, keyset-paginated history with category-name snapshots; refresh
+  retains current content, and returning from details reflects cancellation.
+- [x] Idempotent open-to-cancelled transition. Submitted details and referenced
+  photos remain immutable, including after cancellation; no deletion promise.
+- [x] Private Storage policies/guards, owner checks, trusted RPC-only writes,
+  file/metadata limits, and rollback-only SQL authorization tests.
+- [x] Shared cards/buttons/fields, one active form section, bounded entrance and
+  progress/status motion, stable category/photo widgets while typing, and no
+  new packages or decorative animation loops.
+- [x] English/Arabic, RTL/dark, 320/1200 layouts, enlarged text, keyboard handling,
+  and existing regression coverage; full analysis/tests are recorded below.
+
+Database: apply `202610310001_service_requests.sql` after the foundation and
+provider migrations. It creates `service_requests`, `service_request_photos`,
+owned submit/read/cancel RPCs, and the private `request-photos` bucket. Provider
+access to request/address/photo data is intentionally not granted in M6.
+
+Dependencies and limits: demo submissions/photos are session-local and reset
+on restart. Use synthetic locations and sample photos until privacy, retention,
+account deletion, and orphan cleanup procedures are established. Cancellation
+does not delete photos; original files may contain embedded metadata. The
+existing AI experiment is not invoked by the manual request flow. See SETUP.md
+for ordered migration, Storage, and hosted verification instructions.
+
 ## Future Product Roadmap
 
 All remaining milestones below are **not started**. Their order can be revised after
@@ -224,7 +271,6 @@ constraints, ownership policies, and relevant authorization tests.
 
 | Milestone | Goals and Screens | Database / Integration | Security and Acceptance | Dependencies / Risks |
 | --- | --- | --- | --- | --- |
-| M6: Service requests | Customer request form, location, preferred time, photo attachments, own history | Requests and private request photos | Ownership, file size/type limits, safe upload cleanup, validation and Storage policy tests | M3/M5; location consent and upload failure handling |
 | M7: Quotes and jobs | Eligible provider feed, quote comparison, atomic acceptance, tracking | Quotes, jobs, status history; trusted transactional functions | One accepted quote per request; valid role/state transitions; concurrency and lifecycle tests | M5/M6; never expose customer private details in an open feed |
 | M8: Matching | Nearby eligible providers and explainable ranking | PostGIS if useful; weighted SQL scoring with configurable rules | Skill/verification hard filters; normalized scores; fair cold-start and realistic sample tests | M5/M7; weights are assumptions, not proven optimal |
 | M9: Work history and reviews | Before/after photos, completed work, rating and review screens | Private job photos, reviews, aggregates | Completed-job eligibility, unique review per job, signed URL and moderation tests | M7; protect location/photo privacy |
@@ -326,6 +372,38 @@ Verified on 2026-10-16:
   verification steps. Native folders and `.env` were not edited. This workspace
   had no Git metadata, so the existing files were retained as the baseline and
   no commit was created.
-- Next functional milestone: **M6: Service requests**. It has not been started.
+- At that checkpoint, the next functional milestone was **M6: Service requests**.
   Real-device gallery/performance checks, hosted Storage/API acceptance, and
   production privacy/retention/reviewer procedures remain external follow-ups.
+
+### Service Requests: 2026-10-31
+
+- `flutter pub get` succeeded without adding application dependencies. English
+  and Arabic localization output was regenerated using the existing command.
+- The complete Flutter regression suite passes **293 tests**, retaining all
+  177 prior tests. New coverage comprises 75 model/repository tests, 15 photo
+  input/picker tests, 15 cubit tests, and 11 widget-flow/layout/privacy tests.
+- `flutter analyze --no-pub` reports no issues. Changed Dart files were formatted.
+- Real-SDK loopback tests cover payloads, keyset pagination, three-photo limits,
+  partial upload cleanup, 409 byte matching/non-deletion, dropped responses,
+  retained uncertainty, authenticated stream caps, and session/write races.
+  These are local HTTP fakes, not hosted Supabase acceptance.
+- UI/state tests cover creation, consent, local draft retention, safe retry,
+  discard, cancellation and automatic history refresh, category preselection,
+  on-demand private viewing/cache eviction, and immediate account-switch hiding.
+  Category/photo widgets remain stable while typing and only one form section
+  and entrance timeline are mounted. Large-text headings scroll instead of
+  consuming the keyboard viewport; narrow large-text back controls retain an
+  accessible icon target.
+- All three rollback-only SQL suites pass on isolated PGlite PostgreSQL **16.4
+  and 18.6**, including generated Storage `path_tokens`. The M6 suite emits
+  460 passing assertion/group notices. Fresh/populated reruns, retained records,
+  ACL/bucket drift repair, and atomic rejection of unknown public policies pass.
+- An isolated demo-only browser host built successfully. Mobile/desktop request
+  submission and the rendered forms were checked, including Arabic dark/RTL
+  layout. The host stayed outside the workspace; no web/native platform was added.
+- No hosted migration, native configuration, credentials, commits, or deployment
+  were performed. Real Storage bytes, PostgREST embedding, independent concurrent
+  sessions, production privacy/retention operations, and hardware FPS remain
+  separate acceptance checks in SETUP.md.
+- Next functional milestone: **M7: Quotes and jobs**. It has not been started.

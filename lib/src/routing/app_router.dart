@@ -24,6 +24,9 @@ import '../ui/notifications/notifications_page.dart';
 import '../ui/onboarding/onboarding_page.dart';
 import '../ui/profile/profile_page.dart';
 import '../ui/provider/provider_onboarding_page.dart';
+import '../ui/requests/service_request_form_page.dart';
+import '../ui/requests/service_request_history_page.dart';
+import '../ui/requests/service_request_detail_page.dart';
 import '../ui/shell/app_shell.dart';
 import '../ui/shell/animated_branch_container.dart';
 import 'app_routes.dart';
@@ -51,6 +54,11 @@ String? redirectForSession(SessionState session, String location) {
     case SessionStatus.authenticated:
       if (location == AppRoutes.providerOnboarding &&
           session.user?.role != UserRole.provider) {
+        return AppRoutes.home;
+      }
+      if ((location == AppRoutes.serviceRequests ||
+              location.startsWith('${AppRoutes.serviceRequests}/')) &&
+          session.user?.role != UserRole.customer) {
         return AppRoutes.home;
       }
       return isAuthPage || location == AppRoutes.splash ? AppRoutes.home : null;
@@ -135,6 +143,45 @@ class AppRouter {
             state,
             const ProviderOnboardingPage(),
             pageKey: ValueKey('provider-${session.state.user?.id}'),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.serviceRequests,
+          name: AppRouteNames.serviceRequests,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            ServiceRequestHistoryPage(userId: session.state.user?.id ?? ''),
+            pageKey: ValueKey('requests-${session.state.user?.id}'),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.createServiceRequest,
+          name: AppRouteNames.createServiceRequest,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            ServiceRequestFormPage(
+              userId: session.state.user?.id ?? '',
+              initialCategoryId: state.uri.queryParameters['categoryId'],
+              initialCity: session.state.user?.city ?? '',
+            ),
+            pageKey: ValueKey('request-form-${session.state.user?.id}'),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.serviceRequestDetail,
+          name: AppRouteNames.serviceRequestDetail,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            ServiceRequestDetailPage(
+              userId: session.state.user?.id ?? '',
+              requestId: state.pathParameters['requestId']!,
+            ),
+            pageKey: ValueKey(
+              'request-${session.state.user?.id}-${state.pathParameters['requestId']}',
+            ),
           ),
         ),
         StatefulShellRoute(

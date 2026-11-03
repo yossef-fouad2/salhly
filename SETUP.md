@@ -1,6 +1,6 @@
-# Salahly setup
+# Salhly setup
 
-Salahly runs with dummy credentials out of the box. Switch to Supabase only
+Salhly runs with dummy credentials out of the box. Switch to Supabase only
 when you have a real project.
 
 ## 1. Dependencies
@@ -47,17 +47,24 @@ email is sent.
 3. Then run the entire
    [`supabase/migrations/202610180001_provider_onboarding.sql`](supabase/migrations/202610180001_provider_onboarding.sql)
    as `postgres`. It adds provider setup tables, transactional RPCs, trusted
-   review, and the private `provider-verification` Storage bucket. Both
-   migrations support rerunning their own version; do not skip the foundation.
-4. Verify database authorization by running
+   review, and the private `provider-verification` Storage bucket.
+4. Run the entire
+   [`supabase/migrations/202610310001_service_requests.sql`](supabase/migrations/202610310001_service_requests.sql)
+   as `postgres`. It adds owned service requests, immutable category snapshots,
+   private photo metadata, transactional submit/cancel/read RPCs, and the private
+   `request-photos` bucket. Run all three migrations in order; each supports
+   rerunning its own version without discarding existing records.
+5. Verify database authorization by running
     [`supabase/tests/foundation_rls.sql`](supabase/tests/foundation_rls.sql).
    Also run
    [`supabase/tests/provider_onboarding_rls.sql`](supabase/tests/provider_onboarding_rls.sql).
-   Both suites roll back all fixtures. Storage SQL fixtures do not upload real
+   Then run
+   [`supabase/tests/service_requests_rls.sql`](supabase/tests/service_requests_rls.sql).
+   All three suites roll back their fixtures. Storage SQL fixtures do not upload real
    files or prove the hosted Storage API's behavior.
-5. In **Project Settings > API**, copy the project URL and the public
+6. In **Project Settings > API**, copy the project URL and the public
     publishable/anon key.
-6. Put them in `.env` and switch the mode:
+7. Put them in `.env` and switch the mode:
 
    ```dotenv
    APP_MODE=live
@@ -65,7 +72,7 @@ email is sent.
    SUPABASE_ANON_KEY=YOUR-PUBLIC-KEY
    ```
 
-7. In **Authentication > Email Templates**, make the confirmation and recovery
+8. In **Authentication > Email Templates**, make the confirmation and recovery
    templates include the numeric `{{ .Token }}` so the in-app email-code screens
    work. The app verifies email codes, not deep links.
 
@@ -136,11 +143,60 @@ records requires an explicit trusted retention/deletion procedure. Do not
 delete rows from `storage.objects` directly: that does not remove the underlying
 blob. A scheduled server-side orphan sweep is not included in this milestone.
 
+### Customer service requests
+
+M6 adds customer-only **New request**, **My requests**, and request details.
+The existing Home/Notifications/Profile tab structure is unchanged. Providers
+cannot browse requests yet; quotes, provider selection, and job tracking are M7.
+
+The form keeps its draft in memory and performs no backend writes on typing,
+step changes, gallery selection, or preview. It requires an active service,
+a 5-120 character summary, a 10-2,000 character description, a 2-100 character
+city/district, and 5-500 character address details. Location is entered manually:
+no maps, geocoding, GPS calls, or new native permissions are introduced. A preferred
+date/time is optional, must be in the next 180 days, is stored as a UTC instant,
+and is displayed in the device's local time. It is not a confirmed appointment.
+
+Use synthetic addresses and sample photos until a privacy/retention and account
+deletion process is approved. Explicit consent is required before submission.
+The gallery accepts at most three JPEG/PNG images, each at most 5 MiB; the
+signature/size checks do not constitute malware/content inspection or EXIF
+removal. The picker does not request full metadata, but bytes may still contain
+embedded metadata. No photo is sent to the existing AI experiment automatically.
+
+The `request-photos` bucket must remain private, with a 5 MiB object limit and
+JPEG/PNG MIME types. Objects use `customerUUID/requestUUID/photoUUID.jpg|png`,
+not user-supplied filenames. Only the owning authenticated customer can read
+requests and photos. Published request details and photo references are immutable;
+the only client state change is idempotent `open` to `cancelled`. Cancellation
+retains history/photos and does not claim to delete personal data.
+
+Submission uses stable request and photo IDs, sequential uploads, and one
+transactional publish RPC. After a lost response, the client reconciles the exact
+request and attachment manifest before claiming success. An absent read alone
+does not prove an in-flight publication will not commit: uncertain outcomes keep
+the original draft frozen for retry. Users leaving that state are directed to
+history before starting another request. Photo-free requests are idempotent too.
+
+Cleanup is best-effort and only for the current attempt's unreferenced objects
+after a definitive failure. Conflicting/existing uploads, committed references,
+failed reconciliation, and replacement sessions never trigger destructive
+cleanup. SQL guards and foreign keys separately protect referenced objects,
+including cancelled requests. Abandoned private uploads may require a trusted
+operator sweep; no scheduled cleanup or account-erasure workflow is implemented.
+Use the Storage API for blob cleanup, not direct deletion of `storage.objects`.
+
+Owned history uses bounded keyset pagination and stored category names, so old
+requests remain readable when a category is deactivated. Photos are fetched only
+when explicitly opened, streamed under the byte limit, decoded at up to 1200x1200
+(draft thumbnails at 320x320), and evicted on close or authorization loss. These
+are memory/race safeguards, not measured device frame-rate guarantees.
+
 ## 4. Native app name and package (manual)
 
 `android/` and `ios/` are protected from tooling. To fully rebrand the launcher:
 
-- `android/app/src/main/AndroidManifest.xml`: set `android:label="Salahly"`.
+- `android/app/src/main/AndroidManifest.xml`: set `android:label="Salhly"`.
 - `android/app/build.gradle.kts`: change `namespace` and `applicationId`
   (currently `com.example.nex_fit`), and move
   `android/app/src/main/kotlin/.../MainActivity.kt` to the matching package.
@@ -177,7 +233,7 @@ Run these checks against a dedicated Supabase test project configured in
 section 3, using synthetic customer/provider accounts. Demo and fake-transport
 tests do not verify hosted Auth, email delivery, or HTTP authorization.
 
-1. Run both migrations in order and both rollback-only RLS suites. Confirm
+1. Run all three migrations in order and all three rollback-only RLS suites. Confirm
    their final `PASS: all Salahly ...` notices, not just generic successful-query
    results. Repeat against the actual Storage schema before using real files.
 2. Sign up both roles with email confirmation enabled. Protected tabs must stay
@@ -216,7 +272,21 @@ tests do not verify hosted Auth, email delivery, or HTTP authorization.
     cleanup removes only unreferenced uploads; exercise deferred cleanup and
     logout/account-switch/recovery during an in-flight upload/download. Check
     private image viewing on target devices, including gallery cancellation and
-    supported image formats, with no persistent disk cache added by this feature.
+     supported image formats, with no persistent disk cache added by this feature.
+11. With two synthetic customers and a provider, submit requests with zero and
+    three sample photos, browse history, open private photos, and cancel. Test
+    direct HTTP reads/writes and public object URLs: other users and providers
+    must not access the address, photos, rows, or customer-only RPCs. Verify
+    PostgREST's embedded photo metadata and pagination against the real service.
+12. Retry the same request ID after a lost response, after cancellation, and
+    after the category is deactivated or the preferred time has passed. Identical
+    retries return the original request; changed details/attachment manifests
+    must be rejected. Cancellation must not delete referenced photos.
+13. Interrupt individual photo uploads and final publication; include 409
+    conflicts, failed reconciliation, cleanup failure, logout/recovery, and
+    same-user sign-out/sign-in while work is pending. Exercise simultaneous
+    publish/cancel/delete attempts from independent HTTP sessions. No uncertain
+    outcome may delete referenced files or silently change the submitted draft.
 
 The SQL-only PGlite checks exercise migration, grants, triggers, and RLS under
 simulated database roles. They do not replace these live integration checks.

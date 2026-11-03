@@ -16,6 +16,9 @@ abstract final class AppRoutes {
   static const String notifications = '/notifications';
   static const String profile = '/profile';
   static const String providerOnboarding = '/provider-onboarding';
+  static const String serviceRequests = '/requests';
+  static const String createServiceRequest = '/requests/new';
+  static const String serviceRequestDetail = '/requests/:requestId';
 }
 
 abstract final class AppRouteNames {
@@ -30,4 +33,7 @@ abstract final class AppRouteNames {
   static const notifications = 'notifications';
   static const profile = 'profile';
   static const providerOnboarding = 'providerOnboarding';
+  static const serviceRequests = 'serviceRequests';
+  static const createServiceRequest = 'createServiceRequest';
+  static const serviceRequestDetail = 'serviceRequestDetail';
 }

@@ -165,6 +165,22 @@ class _ProfileViewState extends State<_ProfileView> {
                                       ),
                               ),
                             ],
+                            if (widget.user.role == UserRole.customer) ...[
+                              SizedBox(height: AppSpacing.md),
+                              AppButton(
+                                label: 'requests.history_title'.tr(),
+                                variant: ButtonVariant.outline,
+                                isFullWidth: true,
+                                prefixIcon: const Icon(
+                                  Icons.receipt_long_outlined,
+                                ),
+                                onPressed: busy
+                                    ? null
+                                    : () => context.pushNamed(
+                                        AppRouteNames.serviceRequests,
+                                      ),
+                              ),
+                            ],
                           ],
                         ),
                       ),
