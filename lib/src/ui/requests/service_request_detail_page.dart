@@ -28,13 +28,34 @@ class ServiceRequestDetailPage extends StatelessWidget {
   );
 }
 
-class _DetailView extends StatelessWidget {
+class _DetailView extends StatefulWidget {
   const _DetailView({required this.userId});
   final String userId;
 
+  @override
+  State<_DetailView> createState() => _DetailViewState();
+}
+
+class _DetailViewState extends State<_DetailView> {
+  bool? _wasCurrent;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final current = ModalRoute.isCurrentOf(context) ?? true;
+    if (current && _wasCurrent == false) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && _authorized(context.read<SessionBloc>().state)) {
+          context.read<ServiceRequestDetailCubit>().load();
+        }
+      });
+    }
+    _wasCurrent = current;
+  }
+
   bool _authorized(SessionState state) =>
       state.status == SessionStatus.authenticated &&
-      state.user?.id == userId &&
+      state.user?.id == widget.userId &&
       state.user?.role == UserRole.customer;
 
   Future<void> _cancel(BuildContext context) async {
@@ -86,7 +107,7 @@ class _DetailView extends StatelessWidget {
               children: [
                 Flexible(
                   child: RequestPhotoImage(
-                    userId: userId,
+                    userId: widget.userId,
                     bytes: bytes,
                     semanticLabel: 'requests.photo_label'.tr(
                       namedArgs: {'number': '${photo.position}'},
@@ -342,6 +363,20 @@ class _DetailView extends StatelessWidget {
                             style: context.textTheme.bodyMedium?.copyWith(
                               color: context.colors.onSurfaceVariant,
                             ),
+                          ),
+                          SizedBox(height: AppSpacing.md),
+                          AppButton(
+                            key: const ValueKey('request-open-quotes'),
+                            label: 'marketplace.request_quotes'.tr(),
+                            prefixIcon: const Icon(
+                              Icons.request_quote_outlined,
+                            ),
+                            onPressed: state.busy
+                                ? null
+                                : () => context.pushNamed(
+                                    AppRouteNames.requestQuotes,
+                                    pathParameters: {'requestId': request.id},
+                                  ),
                           ),
                           if (request.status == ServiceRequestStatus.open) ...[
                             SizedBox(height: AppSpacing.lg),

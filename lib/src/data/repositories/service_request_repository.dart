@@ -12,6 +12,7 @@ import '../../utils/task_runner.dart';
 import '../../utils/typedefs.dart';
 import 'auth_repository.dart';
 import 'catalog_repository.dart';
+import 'demo_marketplace_store.dart';
 
 typedef _CheckCustomer = void Function();
 
@@ -21,14 +22,17 @@ class ServiceRequestRepository {
     this._client,
     DateTime Function()? now,
     this._timeout = const Duration(seconds: 30),
+    DemoMarketplaceStore? demoStore,
   }) : _auth = authRepository,
+       demoStore = demoStore ?? DemoMarketplaceStore(),
        _now = now ?? DateTime.now;
 
   final AuthRepository _auth;
   final SupabaseClient? _client;
   final DateTime Function() _now;
   final Duration _timeout;
-  final _demoRequests = <String, ServiceRequest>{};
+  final DemoMarketplaceStore demoStore;
+  Map<String, ServiceRequest> get _demoRequests => demoStore.requests;
   final _demoPhotos = <String, List<RequestPhotoInput>>{};
   final _writingUsers = <String>{};
   final _uncertainRequests = <String>{};
@@ -328,13 +332,16 @@ class ServiceRequestRepository {
     final current = await _find(requestId, userId, check);
     if (current == null) throw const ServerFailure('requests.errors.not_found');
     if (current.status == ServiceRequestStatus.cancelled) return current;
+    if (current.status != ServiceRequestStatus.open) {
+      throw const ServerFailure('requests.errors.status');
+    }
     if (isDemo) {
       final cancelled = ServiceRequest.fromJson({
         ...current.toJson(),
         'status': 'cancelled',
         'cancelled_at': _now().toUtc().toIso8601String(),
       });
-      _demoRequests[requestId] = cancelled;
+      demoStore.cancelRequest(cancelled);
       return cancelled;
     }
     try {

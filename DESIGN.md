@@ -146,6 +146,32 @@ unrelated keystrokes. History is lazy and retains content while refreshing.
 Private request photos use `RequestPhotoImage`, bounded memory-only decoding,
 and immediate authorization-based hiding, never the public network image cache.
 
+Quotes and jobs remain outside the three-tab shell and reuse the same Material
+surfaces, controls, tokens, and page-scoped cubits. The 760px content maximum and
+scrollable headings/consent bodies support narrow screens, enlarged text, RTL,
+and keyboards. Feed, comparison, quote history, and job lists are bounded/lazy;
+refresh errors retain rows rather than replacing them with a loading page.
+Keep expansion-state keys separate from scroll-position keys in PageStorage.
+
+Publication fields start blank and are distinct from private request details.
+Acceptance previews the exact quote and explains selected-provider disclosure.
+Do not show request photos, credentials, contact fields, fictional ratings, ETA,
+payment controls, or fabricated progress in marketplace cards. Render actual job
+history and participant-allowed actions. Ambiguous writes keep their original
+intent and disable competing edits/actions until explicit retry resolves them.
+Private job content and dialogs must hide immediately on account changes;
+replacement sessions must not revive a disposed/revoked page's pending results.
+
+Matching uses the same page-scoped, scrollable Material 3 patterns. Keep public
+discovery settings separate from credential submission and private request text.
+Recommended and all-eligible are query modes, not first-page client filters.
+Changing filters resets the cursor; retain old rows only with an explicit stale/
+previous-query label until an authoritative refresh. Render unknown factors
+distinctly from known zero scores and label neutral values as an assumption.
+Show weight shares normalized by the configured total; evidence coverage is not
+confidence. No invented star ratings, exact travel distances, ETA, verification
+of experience, or automatic invitation/booking controls belong on match cards.
+
 ### Dark mode checklist
 
 - No raw `Colors.white` / `Colors.black` for surfaces — use `colorScheme` roles.

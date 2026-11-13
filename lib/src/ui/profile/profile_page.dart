@@ -164,6 +164,47 @@ class _ProfileViewState extends State<_ProfileView> {
                                         AppRouteNames.providerOnboarding,
                                       ),
                               ),
+                              SizedBox(height: AppSpacing.sm),
+                              AppButton(
+                                label: 'marketplace.browse_requests'.tr(),
+                                variant: ButtonVariant.outline,
+                                isFullWidth: true,
+                                prefixIcon: const Icon(Icons.search_rounded),
+                                onPressed: busy
+                                    ? null
+                                    : () => context.pushNamed(
+                                        AppRouteNames.providerRequestFeed,
+                                      ),
+                              ),
+                              SizedBox(height: AppSpacing.sm),
+                              AppButton(
+                                label: 'marketplace.my_quotes'.tr(),
+                                variant: ButtonVariant.outline,
+                                isFullWidth: true,
+                                prefixIcon: const Icon(
+                                  Icons.request_quote_outlined,
+                                ),
+                                onPressed: busy
+                                    ? null
+                                    : () => context.pushNamed(
+                                        AppRouteNames.providerQuotes,
+                                      ),
+                              ),
+                              SizedBox(height: AppSpacing.sm),
+                              AppButton(
+                                key: const ValueKey(
+                                  'matching-open-provider-settings',
+                                ),
+                                label: 'matching.open_settings'.tr(),
+                                variant: ButtonVariant.outline,
+                                isFullWidth: true,
+                                prefixIcon: const Icon(Icons.tune_rounded),
+                                onPressed: busy
+                                    ? null
+                                    : () => context.pushNamed(
+                                        AppRouteNames.providerMatchingSettings,
+                                      ),
+                              ),
                             ],
                             if (widget.user.role == UserRole.customer) ...[
                               SizedBox(height: AppSpacing.md),
@@ -181,6 +222,18 @@ class _ProfileViewState extends State<_ProfileView> {
                                       ),
                               ),
                             ],
+                            SizedBox(height: AppSpacing.sm),
+                            AppButton(
+                              label: 'marketplace.jobs'.tr(),
+                              variant: ButtonVariant.outline,
+                              isFullWidth: true,
+                              prefixIcon: const Icon(
+                                Icons.home_repair_service_outlined,
+                              ),
+                              onPressed: busy
+                                  ? null
+                                  : () => context.pushNamed(AppRouteNames.jobs),
+                            ),
                           ],
                         ),
                       ),

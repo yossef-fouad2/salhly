@@ -63,8 +63,9 @@ Desktop.ini
 *.log
 npm-debug.log*
 
-# Local agent UI state, not shared commands or agent configuration
+# Local agent state and generated code index, not shared configuration
 /.kilo/agent-manager.json
+/graphify-out/
 
 # Local archives, proposal documents, and the AI helper's test photo
 *.zip

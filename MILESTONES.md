@@ -5,11 +5,11 @@ the local home-services platform described in `plan.md`.
 
 ## Current Scope
 
-The foundation, authentication, and homepage work is retained below. The
-2026-10-17 continuation added the performance-first motion pass (M4.5); the
-2026-10-18 continuation authorizes only the next functional milestone, M5
-provider onboarding. It does not authorize building every feature in `plan.md`
-at once. UI remains reusable, simple Material 3 until a visual design is agreed.
+The foundation, authentication, homepage, motion, provider onboarding, requests,
+and quotes/jobs work is retained below. The 2026-11-11 continuation authorizes
+M8 matching only, not every remaining feature in `plan.md` at once.
+UI preserves the current reusable Material 3 components and supplied visual
+references. Hosted/backend and real-device acceptance remain separate checks.
 
 - App name: **Salahly**; Dart package: `salahly`.
 - Stack: Flutter, BLoC/Cubit, GoRouter, Supabase, English and Arabic.
@@ -32,7 +32,8 @@ at once. UI remains reusable, simple Material 3 until a visual design is agreed.
 - Replace unconditional Supabase initialization with explicit demo/live setup.
 - Keep data access out of widgets and keep route guards in the central router.
 - Keep the existing AI experiment isolated; it is not part of this milestone.
-- This workspace has no Git repository, so no commits or Git diff are available.
+- At the original scaffold review this workspace had no Git metadata. The
+  current workspace is a Git repository; historical no-commit notes remain below.
 
 ## Implementation Milestones
 
@@ -263,6 +264,90 @@ does not delete photos; original files may contain embedded metadata. The
 existing AI experiment is not invoked by the manual request flow. See SETUP.md
 for ordered migration, Storage, and hosted verification instructions.
 
+### M7: Quotes and Jobs
+
+Status: implemented and locally verified (2026-11-09). Hosted Supabase and
+physical-device acceptance remain external checks, not completed verification.
+
+Goals: explicit privacy-safe request publication, eligible provider browsing,
+versioned quote comparison/acceptance, and participant-only job tracking.
+Preserve M1-M6, the three-tab shell, and customer-only request photos.
+
+- [x] Separate, immutable public summary/city with explicit publication consent;
+  existing M6 text/address/photos are never copied into an open feed.
+- [x] Current verified-provider, active-skill, and exact normalized service-area
+  eligibility; no distance, ranking, or availability-slot claims.
+- [x] One quote per provider/request, integer EGP minor units, estimated duration,
+  notes, revision-checked updates, withdrawal, and explicit reactivation.
+- [x] Transactional acceptance rechecks the displayed revision and eligibility,
+  accepts one quote, closes pending competitors, assigns one job, and records
+  consent/history. Accepted terms are immutable; retries are idempotent.
+- [x] Acceptance-time disclosure of original text/location to the selected provider
+  only. Request photos, credential evidence, emails, and phones are not shared.
+- [x] Provider progress, customer completion confirmation, pre-work cancellation,
+  immutable participant access/history, and no terminal-state reopening.
+- [x] Bounded keyset lists, retained refresh content, page-scoped state, original
+  interrupted-action recovery, and immediate account-sensitive hiding.
+- [x] Explicit shared in-memory demo flow with a separate plumbing/Cairo sample
+  marketplace provider; ordinary onboarding submissions remain pending.
+
+Database: apply `202611090001_quotes_and_jobs.sql` after M6. It creates
+`request_marketplace_listings`, `provider_quotes`, `service_jobs`, and
+`job_status_history`, with RLS enabled and RPC-only client access. Existing M6
+request/photo owner policies remain unchanged in scope. Requests gain `assigned`;
+job completion/cancellation does not reopen the assigned request.
+
+Verification: **430 Flutter tests pass**, full analysis is clean, and all 32
+hand-edited Dart files pass formatting checks. `quotes_and_jobs_rls.sql` extends
+the rollback suites; the disposable native PostgreSQL 18.6 run passed all four
+suites on fresh and populated-rerun schemas, plus **10 independently blocked
+concurrency scenarios**. Detailed commands and limits are recorded below.
+
+Dependencies and limits: M5/M6; no hosted migration, credentials, native changes,
+payment integration, live notifications, matching/ranking, or production privacy
+operations are included. See `SETUP.md` for migration order, lifecycle policy,
+explicit sample accounts, local test commands, and hosted acceptance checks.
+
+### M8: Smart Matching
+
+Status: implementation and verification in progress (2026-11-11).
+
+Goals: explainable request-specific recommendations and full eligible-provider
+browsing, with configurable initial ranking assumptions and fair missing-data
+handling. Preserve M1-M7 disclosure, quote revision, and job lifecycle rules.
+
+- Separate provider discovery opt-in and consented name snapshot; no automatic
+  publication of private M5 bios, credentials, contact fields, or service records.
+- Hard current provider role, latest verified credential, active matching skill,
+  published service-area label, and discovery consent filters in trusted SQL.
+- Optional manually supplied two-decimal work-origin and customer matching
+  point. Straight-line estimates are not GPS, road distance, ETA, or verified
+  coverage. A discoverable origin is public/inferable and must not be private.
+- Optional explicit service-area weekday/time preference compared with declared
+  weekly hours, not the device time zone or M6 preferred appointment instant.
+- Category-specific self-reported years, bounded normalized factors, a fixed
+  neutral prior for unknown data, and whole-weight-denominator scoring. Ratings
+  remain unavailable until M9; no invented stars or response/completion quality.
+- Trusted configurable weights, distance scale, experience cap, and revision;
+  initial 35/25/20/20 weights are assumptions, not proven optimal.
+- Recommended and all-eligible modes with request-specific deterministic ties,
+  bounded query/rules-bound cursors, explicit explanations, and retained refresh
+  content. Provider selection still requires an actual M7 quote and consent.
+- Separate provider settings and customer matching routes; English/Arabic,
+  RTL/dark and narrow/large-text layouts using the existing visual system.
+- Realistic synthetic near/far/new-provider scenarios, no-review cold starts,
+  owner/role/consent tests, and full M1-M7 regression verification.
+
+Database: `202611110001_smart_matching.sql` after M7; separate RPC-only
+`provider_matching_profiles` and `matching_rules` with RLS and closed table/
+column grants. Old request/photo/provider/quote/job policies remain unchanged.
+Customer matching points are query inputs only, not saved in application tables.
+
+Limits: no geocoding/maps/GPS permissions, trained model, review workflow,
+invitations/notifications, booked availability, payments, or remote deployment.
+Verification results are recorded after integrated checks, not inferred from
+the presence of implementation files.
+
 ## Future Product Roadmap
 
 All remaining milestones below are **not started**. Their order can be revised after
@@ -271,8 +356,6 @@ constraints, ownership policies, and relevant authorization tests.
 
 | Milestone | Goals and Screens | Database / Integration | Security and Acceptance | Dependencies / Risks |
 | --- | --- | --- | --- | --- |
-| M7: Quotes and jobs | Eligible provider feed, quote comparison, atomic acceptance, tracking | Quotes, jobs, status history; trusted transactional functions | One accepted quote per request; valid role/state transitions; concurrency and lifecycle tests | M5/M6; never expose customer private details in an open feed |
-| M8: Matching | Nearby eligible providers and explainable ranking | PostGIS if useful; weighted SQL scoring with configurable rules | Skill/verification hard filters; normalized scores; fair cold-start and realistic sample tests | M5/M7; weights are assumptions, not proven optimal |
 | M9: Work history and reviews | Before/after photos, completed work, rating and review screens | Private job photos, reviews, aggregates | Completed-job eligibility, unique review per job, signed URL and moderation tests | M7; protect location/photo privacy |
 | M10: Live notifications | Durable job/quote alerts, read state, reconnect behavior | Notification event generation, Realtime, optional push delivery | Private channels, deduplication, reconnect and recipient tests; Realtime is not the only record | M7; native push setup needs separate approval |
 | M11: AI problem assistant | Photo/text suggestions and customer-confirmed request draft | Harden existing Edge Function; AI diagnoses and private uploads | Server-only AI secrets, rate limits, validated structured output, uncertainty and safety tests | M6; unreliable models and timeouts must not block manual requests |
@@ -406,4 +489,60 @@ Verified on 2026-10-16:
   were performed. Real Storage bytes, PostgREST embedding, independent concurrent
   sessions, production privacy/retention operations, and hardware FPS remain
   separate acceptance checks in SETUP.md.
-- Next functional milestone: **M7: Quotes and jobs**. It has not been started.
+- At that checkpoint, the next functional milestone was **M7: Quotes and jobs**.
+
+### Quotes And Jobs: 2026-11-09
+
+- Implemented M7 only, preserving M1-M6 and the Home/Notifications/Profile shell.
+  Updated `README.md`, `SETUP.md`, and `DESIGN.md` with actual navigation,
+  explicit disclosure boundaries, lifecycle policy, and demo/live behavior.
+- Added six named, centrally guarded routes: provider feed, provider quote form,
+  provider quote history, customer comparison/sharing, job list, and job detail.
+  English/Arabic strings and generated localization are synchronized.
+- Added immutable marketplace models, a session-guarded RPC repository, and a
+  shared in-memory demo store. A separate plumbing/Cairo sample provider enables
+  cross-account demonstration without approving ordinary M5 submissions.
+- Added migration `202611090001_quotes_and_jobs.sql`, rollback suite
+  `quotes_and_jobs_rls.sql`, and the disposable native-PostgreSQL test runner with
+  deterministic independent-connection concurrency checks. No hosted migration
+  was applied and no `.env`, native configuration, or runtime package was changed.
+- Verified `flutter pub get`, localization generation, and
+  `flutter analyze --no-pub` (**no issues found**). All 32 hand-edited Dart files
+  pass `dart format --output=none --set-exit-if-changed`; tracked diffs pass
+  `git diff --check` (only normal Windows line-ending notices).
+- Final full Flutter run: **430 tests passed**, using
+  `flutter test --no-pub --reporter silent --file-reporter expanded:<temp-log>`.
+  This includes 100 M7 model/repository tests, 17 state tests, 18 full-app widget
+  tests, one English/Arabic key-parity test, and the preserved earlier suites.
+  M6 additionally tests the new assigned status without a cancellation timestamp.
+- Real-SDK loopback tests cover RPC arguments, bounded/tied pagination, lost
+  responses and canonical reconciliation, original-action retry across page
+  recreation, stale identical-price revisions, frozen terms/history, error
+  sanitization, duplicate writes, and auth/account/recovery races. These use
+  local HTTP fixtures, not the hosted database or Storage service.
+- UI/state checks cover explicit consent, blank public fields, comparison,
+  withdrawal/reactivation, provider progress/customer confirmation, retained
+  refresh errors, dirty-form exits, guards, session replacement, and private
+  content hiding. Layout coverage includes 320/1200 widths, Arabic/dark mode,
+  enlarged text, and keyboard space; no physical-device FPS claim is made.
+- Final SQL command: `node supabase/tests/run_local.mjs --deps <temp-deps> --concurrency`.
+  On native **PostgreSQL 18.6**, all four fresh migrations and all four ordered
+  populated reruns passed; stored rows remained unchanged. All four rollback
+  suites passed twice: **2,428 PASS notices**, including **333 M7 PASS notices per
+  phase**. PostgreSQL stopped and the isolated cluster was removed afterward.
+- The **10 deterministic concurrency scenarios** confirm blocking via actual
+  PostgreSQL lock state and cover competing acceptance, acceptance/cancellation,
+  acceptance/price revision, acceptance/withdrawal, and duplicate provider/customer
+  transitions. Exactly one quote/job wins, stale prices cannot be accepted,
+  accepted terms remain frozen, and duplicate history is not created.
+- M7 SQL security checks include role/owner isolation, publication consent and
+  redaction, current eligibility, direct table/column denial, revision and
+  canonical-retry rules, participant lifecycle/history, bounded pagination,
+  unique/FK backstops, trusted tampering, and policy/schema drift. Existing M6
+  owner-only request/photo and Storage policy checks still pass.
+- Remaining external checks: real hosted Auth/PostgREST/JWT and Storage behavior,
+  independent authenticated HTTP races, physical-device acceptance/profiling,
+  and production consent/retention/deletion operations. Local SQL uses simulated
+  identity claims and Storage metadata, not uploaded bytes or hosted signed URLs.
+- No commits or remote deployments were made. Next functional milestone:
+  **M8: Smart matching**, not started.

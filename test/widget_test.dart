@@ -113,7 +113,7 @@ void main() {
   );
 
   testWidgets(
-    'home has three tabs, filters categories, and explains future bookings',
+    'home has three tabs, filters categories, and explains explicit sharing',
     (tester) async {
       await _pumpApp(tester);
       await _tap(tester, 'Try as customer');
@@ -130,7 +130,24 @@ void main() {
       expect(find.text('Plumbing'), findsOneWidget);
       expect(find.text('Carpentry'), findsNothing);
       await _tap(tester, 'Plumbing');
-      expect(find.textContaining('no booking is made here'), findsWidgets);
+      expect(
+        find.descendant(
+          of: find.byType(BottomSheet),
+          matching: find.textContaining(
+            'separately publish a new summary and city',
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byType(BottomSheet),
+          matching: find.textContaining(
+            'A preferred time is not an appointment.',
+          ),
+        ),
+        findsOneWidget,
+      );
       expect(
         ModalRoute.of(tester.element(find.byType(BottomSheet)))!.navigator,
         same(rootNavigator),

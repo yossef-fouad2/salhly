@@ -19,6 +19,14 @@ abstract final class AppRoutes {
   static const String serviceRequests = '/requests';
   static const String createServiceRequest = '/requests/new';
   static const String serviceRequestDetail = '/requests/:requestId';
+  static const String providerRequestFeed = '/provider/requests';
+  static const String providerQuote = '/provider/requests/:requestId/quote';
+  static const String providerQuotes = '/provider/quotes';
+  static const String requestQuotes = '/requests/:requestId/quotes';
+  static const String requestMatches = '/requests/:requestId/matches';
+  static const String providerMatchingSettings = '/provider/matching';
+  static const String jobs = '/jobs';
+  static const String jobDetail = '/jobs/:jobId';
 }
 
 abstract final class AppRouteNames {
@@ -36,4 +44,12 @@ abstract final class AppRouteNames {
   static const serviceRequests = 'serviceRequests';
   static const createServiceRequest = 'createServiceRequest';
   static const serviceRequestDetail = 'serviceRequestDetail';
+  static const providerRequestFeed = 'providerRequestFeed';
+  static const providerQuote = 'providerQuote';
+  static const providerQuotes = 'providerQuotes';
+  static const requestQuotes = 'requestQuotes';
+  static const requestMatches = 'requestMatches';
+  static const providerMatchingSettings = 'providerMatchingSettings';
+  static const jobs = 'jobs';
+  static const jobDetail = 'jobDetail';
 }

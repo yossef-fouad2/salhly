@@ -25,7 +25,7 @@ bool _textWithin(String text, int minimum, int maximum) {
   return length >= minimum && length <= maximum;
 }
 
-enum ServiceRequestStatus { open, cancelled }
+enum ServiceRequestStatus { open, cancelled, assigned }
 
 /// Session-only input. Identity equality avoids comparing megabytes on keystrokes.
 final class RequestPhotoInput {
@@ -258,7 +258,7 @@ class ServiceRequest extends Equatable {
         !_textWithin(request.address, 5, 500) ||
         photos.length > 3 ||
         photos.map((photo) => photo.id).toSet().length != photos.length ||
-        (request.status == ServiceRequestStatus.open &&
+        (request.status != ServiceRequestStatus.cancelled &&
             request.cancelledAt != null) ||
         (request.status == ServiceRequestStatus.cancelled &&
             (request.cancelledAt == null ||

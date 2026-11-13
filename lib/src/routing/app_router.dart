@@ -20,6 +20,13 @@ import '../ui/auth/session_gate_page.dart';
 import '../ui/auth/signup_screen.dart';
 import '../ui/auth/verify_email_screen.dart';
 import '../ui/home/home_page.dart';
+import '../ui/marketplace/customer_quotes_page.dart';
+import '../ui/marketplace/job_detail_page.dart';
+import '../ui/marketplace/jobs_page.dart';
+import '../ui/marketplace/provider_browse_page.dart';
+import '../ui/marketplace/provider_quote_page.dart';
+import '../ui/matching/provider_matching_settings_page.dart';
+import '../ui/matching/request_matches_page.dart';
 import '../ui/notifications/notifications_page.dart';
 import '../ui/onboarding/onboarding_page.dart';
 import '../ui/profile/profile_page.dart';
@@ -52,7 +59,8 @@ String? redirectForSession(SessionState session, String location) {
           ? null
           : AppRoutes.resetPassword;
     case SessionStatus.authenticated:
-      if (location == AppRoutes.providerOnboarding &&
+      if ((location == AppRoutes.providerOnboarding ||
+              location.startsWith('/provider/')) &&
           session.user?.role != UserRole.provider) {
         return AppRoutes.home;
       }
@@ -170,6 +178,46 @@ class AppRouter {
           ),
         ),
         GoRoute(
+          path: AppRoutes.requestQuotes,
+          name: AppRouteNames.requestQuotes,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            CustomerQuotesPage(
+              userId: session.state.user?.id ?? '',
+              requestId: state.pathParameters['requestId']!,
+            ),
+            pageKey: ValueKey(
+              'request-quotes-${session.state.user?.id}-${state.pathParameters['requestId']}',
+            ),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.requestMatches,
+          name: AppRouteNames.requestMatches,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            RequestMatchesPage(
+              userId: session.state.user?.id ?? '',
+              requestId: state.pathParameters['requestId']!,
+            ),
+            pageKey: ValueKey(
+              'matching-${session.state.user?.id}-${state.pathParameters['requestId']}',
+            ),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.providerMatchingSettings,
+          name: AppRouteNames.providerMatchingSettings,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            ProviderMatchingSettingsPage(userId: session.state.user?.id ?? ''),
+            pageKey: ValueKey('matching-settings-${session.state.user?.id}'),
+          ),
+        ),
+        GoRoute(
           path: AppRoutes.serviceRequestDetail,
           name: AppRouteNames.serviceRequestDetail,
           pageBuilder: (context, state) => _motionPage(
@@ -181,6 +229,69 @@ class AppRouter {
             ),
             pageKey: ValueKey(
               'request-${session.state.user?.id}-${state.pathParameters['requestId']}',
+            ),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.providerRequestFeed,
+          name: AppRouteNames.providerRequestFeed,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            ProviderBrowsePage(userId: session.state.user?.id ?? ''),
+            pageKey: ValueKey('provider-feed-${session.state.user?.id}'),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.providerQuote,
+          name: AppRouteNames.providerQuote,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            ProviderQuotePage(
+              userId: session.state.user?.id ?? '',
+              requestId: state.pathParameters['requestId']!,
+            ),
+            pageKey: ValueKey(
+              'provider-quote-${session.state.user?.id}-${state.pathParameters['requestId']}',
+            ),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.providerQuotes,
+          name: AppRouteNames.providerQuotes,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            ProviderBrowsePage(
+              userId: session.state.user?.id ?? '',
+              myQuotes: true,
+            ),
+            pageKey: ValueKey('provider-quotes-${session.state.user?.id}'),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.jobs,
+          name: AppRouteNames.jobs,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            JobsPage(userId: session.state.user?.id ?? ''),
+            pageKey: ValueKey('jobs-${session.state.user?.id}'),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.jobDetail,
+          name: AppRouteNames.jobDetail,
+          pageBuilder: (context, state) => _motionPage(
+            context,
+            state,
+            JobDetailPage(
+              userId: session.state.user?.id ?? '',
+              jobId: state.pathParameters['jobId']!,
+            ),
+            pageKey: ValueKey(
+              'job-${session.state.user?.id}-${state.pathParameters['jobId']}',
             ),
           ),
         ),

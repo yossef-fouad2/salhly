@@ -8,6 +8,8 @@ import '../../data/repositories/catalog_repository.dart';
 import '../../data/repositories/notifications_repository.dart';
 import '../../data/repositories/provider_repository.dart';
 import '../../data/repositories/service_request_repository.dart';
+import '../../data/repositories/marketplace_repository.dart';
+import '../../data/repositories/matching_repository.dart';
 import '../../services/request_photo_picker.dart';
 import '../../services/verification_document_picker.dart';
 import '../../ui/auth/bloc/session_bloc.dart';
@@ -20,6 +22,8 @@ class StateWrapper extends StatelessWidget {
   final VerificationDocumentPicker? verificationDocumentPicker;
   final ServiceRequestRepository? serviceRequestRepository;
   final RequestPhotoPicker? requestPhotoPicker;
+  final MarketplaceRepository? marketplaceRepository;
+  final MatchingRepository? matchingRepository;
 
   const StateWrapper({
     super.key,
@@ -29,6 +33,8 @@ class StateWrapper extends StatelessWidget {
     this.verificationDocumentPicker,
     this.serviceRequestRepository,
     this.requestPhotoPicker,
+    this.marketplaceRepository,
+    this.matchingRepository,
   });
 
   @override
@@ -83,6 +89,30 @@ class StateWrapper extends StatelessWidget {
         ),
         RepositoryProvider<RequestPhotoPicker>(
           create: (_) => requestPhotoPicker ?? RequestPhotoPicker.instance,
+        ),
+        RepositoryProvider<MarketplaceRepository>(
+          create: (context) =>
+              marketplaceRepository ??
+              MarketplaceRepository(
+                authRepository: context.read<AuthRepository>(),
+                demoStore: context.read<ServiceRequestRepository>().demoStore,
+                client: context.read<AuthRepository>().isDemo
+                    ? null
+                    : AppConfig.supabase!,
+              ),
+        ),
+        RepositoryProvider<MatchingRepository>(
+          create: (context) =>
+              matchingRepository ??
+              MatchingRepository(
+                authRepository: context.read<AuthRepository>(),
+                providerRepository: context.read<ProviderRepository>(),
+                catalogRepository: context.read<CatalogRepository>(),
+                demoStore: context.read<ServiceRequestRepository>().demoStore,
+                client: context.read<AuthRepository>().isDemo
+                    ? null
+                    : AppConfig.supabase!,
+              ),
         ),
       ],
       child: BlocProvider<SessionBloc>(

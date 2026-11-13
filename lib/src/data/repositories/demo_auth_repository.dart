@@ -4,6 +4,7 @@ import '../../utils/utils.dart';
 import '../models/auth_session.dart';
 import '../models/user_model.dart';
 import 'auth_repository.dart';
+import 'demo_marketplace_store.dart';
 
 /// Local development only. Accounts and passwords disappear on app restart.
 class DemoAuthRepository implements AuthRepository {
@@ -21,10 +22,21 @@ class DemoAuthRepository implements AuthRepository {
         confirmed: true,
       );
     }
+    _accounts[marketplaceProviderEmail] = _DemoAccount(
+      user: const AppUser(
+        id: DemoMarketplaceStore.sampleProviderId,
+        email: marketplaceProviderEmail,
+        name: 'Sample Marketplace Provider',
+        role: UserRole.provider,
+      ),
+      password: demoPassword,
+      confirmed: true,
+    );
   }
 
   static const customerEmail = 'customer@salahly.demo';
   static const providerEmail = 'provider@salahly.demo';
+  static const marketplaceProviderEmail = 'marketplace-provider@salahly.demo';
   static const demoPassword = 'Salahly123!';
   static const demoCode = '123456';
 
@@ -100,7 +112,10 @@ class DemoAuthRepository implements AuthRepository {
   }
 
   @override
-  FutureEither<void> confirmEmail({required String email, required String code}) {
+  FutureEither<void> confirmEmail({
+    required String email,
+    required String code,
+  }) {
     return runTask(() async {
       final account = _accounts[email.trim().toLowerCase()];
       if (account == null || account.confirmed || code.trim() != demoCode) {
@@ -184,8 +199,8 @@ class DemoAuthRepository implements AuthRepository {
 
   @override
   FutureEither<void> logout() => runTask(() async {
-        _setSession(const AuthSession());
-      });
+    _setSession(const AuthSession());
+  });
 
   @override
   Future<void> dispose() => _changes.close();

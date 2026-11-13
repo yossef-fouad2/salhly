@@ -318,7 +318,7 @@ void main() {
         );
       }
       expect(
-        () => ServiceRequest.fromJson({..._snapshot(), 'status': 'assigned'}),
+        () => ServiceRequest.fromJson({..._snapshot(), 'status': 'unknown'}),
         throwsArgumentError,
       );
       expect(
@@ -358,6 +358,26 @@ void main() {
       expect(past.cancelledAt, past.createdAt);
       expect(ServiceRequest.fromJson(_snapshot()).cancelledAt, isNull);
     });
+
+    test(
+      'assigned requests retain details without a cancellation timestamp',
+      () {
+        final assigned = ServiceRequest.fromJson({
+          ..._snapshot(),
+          'status': 'assigned',
+        });
+        expect(assigned.status, ServiceRequestStatus.assigned);
+        expect(assigned.cancelledAt, isNull);
+        expect(assigned.address, ServiceRequest.fromJson(_snapshot()).address);
+        expect(
+          () => ServiceRequest.fromJson({
+            ...assigned.toJson(),
+            'cancelled_at': _instant.toIso8601String(),
+          }),
+          throwsFormatException,
+        );
+      },
+    );
 
     test(
       'rejects invalid photo manifests, paths, types, sizes, and ordering',
@@ -1006,7 +1026,7 @@ void main() {
         (_snapshot(id: _id(1)), 'requests.errors.access'),
         ({'id': _requestId}, 'requests.errors.invalid_request'),
         (
-          {..._snapshot(), 'status': 'assigned'},
+          {..._snapshot(), 'status': 'unknown'},
           'requests.errors.invalid_request',
         ),
         ([_snapshot()], 'requests.errors.invalid_request'),

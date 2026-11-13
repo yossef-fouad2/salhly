@@ -138,6 +138,45 @@ class _HomeViewState extends State<_HomeView> {
                           ),
                     onBrowse: isProvider ? null : _browseServices,
                   ),
+                  SizedBox(height: AppSpacing.md),
+                  Wrap(
+                    spacing: AppSpacing.sm,
+                    runSpacing: AppSpacing.sm,
+                    children: [
+                      if (isProvider) ...[
+                        AppButton(
+                          label: 'marketplace.browse_requests'.tr(),
+                          variant: ButtonVariant.outline,
+                          prefixIcon: const Icon(Icons.search_rounded),
+                          onPressed: () => context.pushNamed(
+                            AppRouteNames.providerRequestFeed,
+                          ),
+                        ),
+                        AppButton(
+                          label: 'marketplace.my_quotes'.tr(),
+                          variant: ButtonVariant.outline,
+                          prefixIcon: const Icon(Icons.request_quote_outlined),
+                          onPressed: () =>
+                              context.pushNamed(AppRouteNames.providerQuotes),
+                        ),
+                      ] else
+                        AppButton(
+                          label: 'requests.history_title'.tr(),
+                          variant: ButtonVariant.outline,
+                          prefixIcon: const Icon(Icons.receipt_long_outlined),
+                          onPressed: () =>
+                              context.pushNamed(AppRouteNames.serviceRequests),
+                        ),
+                      AppButton(
+                        label: 'marketplace.jobs'.tr(),
+                        variant: ButtonVariant.outline,
+                        prefixIcon: const Icon(
+                          Icons.home_repair_service_outlined,
+                        ),
+                        onPressed: () => context.pushNamed(AppRouteNames.jobs),
+                      ),
+                    ],
+                  ),
                   SizedBox(height: AppSpacing.xl),
                   Row(
                     key: _servicesKey,
